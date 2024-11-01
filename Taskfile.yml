@@ -1,0 +1,32 @@
+# https://github.com/go-task/task
+version: "3"
+
+tasks:
+  default:
+    desc: Default
+    deps:
+      - task: build
+  build:
+    desc: Build
+    cmds:
+      - go build .
+  test:
+    desc: Test
+    cmds:
+      - go test .
+  vet:
+    desc: go vet and staticcheck
+    cmds:
+      - go vet ./...
+      - staticcheck ./...
+  fmt:
+    desc: go fmt
+    cmds:
+      - goimports -w ./...
+  install-requirements:
+    desc: install required libraries
+    cmds:
+      - go install honnef.co/go/tools/cmd/staticcheck@latest
+      - go install github.com/go-task/task/v3/cmd/task@latest
+      - go install golang.org/x/tools/cmd/goimports@latest
+      - go install github.com/mgechev/revive@latest
